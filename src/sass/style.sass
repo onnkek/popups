@@ -1,0 +1,172 @@
+@import "fonts"
+@import "mixins"
+
+$maxWidth: 1920
+$maxWidthContainer: 1170
+$mainColor: #2cd5d5
+$mainDarkColor: #773434
+
+*, *::before, **:after
+    box-sizing: border-box
+
+
+body
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    background-color: #555
+
+.parent
+    max-width: 1200px
+    margin: 0 auto
+    background-color: #1a6200
+    padding: 50px
+
+.child
+    font-size: 30px
+    background-color: $mainColor
+
+.child
+    padding: 20px
+    &:not(:last-child)
+        margin-bottom: 10px
+
+.button
+    display: block
+    height: 40px
+    width: 200px
+    background-color: $mainColor
+    outline: none
+    border: 1px solid $mainColor
+    border-radius: 5px
+    transition: 0.3s box-shadow
+    &:focus
+        box-shadow: 0px 0px 5px $mainColor
+    &:hover
+        cursor: pointer
+        box-shadow: 0px 0px 5px $mainColor
+    &:active
+        box-shadow: 0px 0px 10px $mainColor
+
+@media (max-width: 1200px)
+    .parent
+        font-size: 20px
+        @include adaptiv("padding", 50, 10, 0)
+
+    .child
+        @include adaptiv("font-size", 30, 10, 0)
+        &:not(:last-child)
+            @include adaptiv("margin-bottom", 20, 10, 0)
+
+
+.popup
+    visibility: hidden
+    display: flex
+    position: fixed
+    justify-content: center
+    align-items: center
+    top: 0
+    left: 0
+    height: 100vh
+    width: 100vw
+    &_active
+        visibility: visible
+        .popup__container
+            transition: 0.3s transform ease, 0.5s opacity ease
+            opacity: 1
+            transform: scale(100%)
+        .popup__overlay
+            background-color: rgba(0, 0, 0, 0.8)
+    &_close
+        .popup__container
+            transition: 0.5s transform ease, 0.3s opacity ease
+            opacity: 0
+            transform: scale(0%)
+        .popup__overlay
+            background-color: rgba(0, 0, 0, 0)
+    &__overlay
+        position: absolute
+        top: 0
+        right: 0
+        height: 100%
+        width: 100%
+        background-color: rgba(0, 0, 0, 0)
+        transition: 0.3s background-color ease
+    &__container
+        opacity: 0
+        transform: scale(0%)
+        position: relative
+        flex: 1 1 400px
+        max-width: 400px
+        min-height: 300px
+        margin: 30px
+        background-color: #2c2932
+        border-radius: 10px
+        border: 1px solid #666
+        box-shadow: 0px 0px 5px black
+    &__close-button
+        position: absolute
+        top: 15px
+        right: 15px
+        width: 20px
+        height: 20px
+        cursor: pointer
+        padding: 0
+        margin: 0
+        background-color: transparent
+        border: none
+        &::before
+            position: absolute
+            top: 0
+            right: 50%
+            content: ''
+            display: block
+            width: 2px
+            height: 100%
+            transform: rotate(-45deg)
+            background-color: $mainColor
+            transition: 0.3s box-shadow ease
+        &::after
+            position: absolute
+            top: 0
+            right: 50%
+            content: ''
+            display: block
+            width: 2px
+            height: 100%
+            transform: rotate(45deg)
+            background-color: $mainColor
+            transition: 0.3s box-shadow ease
+        &:hover
+            &::before,&::after
+                box-shadow: 0px 0px 10px $mainColor
+        
+
+.form
+    padding: 20px 20px
+    width: 100%
+    color: white
+    &__input
+        padding: 2px 10px
+        display: block
+        height: 40px
+        width: 100%
+        border: 1px solid #666
+        outline: none
+        margin-bottom: 20px
+        font-family: inherit
+        font-size: 16px
+        background-color: #1e1c22
+        border-radius: 5px
+        color: white
+        font-weight: 100
+        transition: 0.3s border-color ease, 0.3s box-shadow ease
+        &:focus-visible
+            border-color: $mainColor
+            box-shadow: 0px 0px 5px $mainColor
+    &__button
+        width: 100%
+    &__title
+        margin-bottom: 10px
+        font-weight: 500
+            
+
+
